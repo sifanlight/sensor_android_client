@@ -1,0 +1,85 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:layout_margin = "16dp"
+    tools:context = ".MainActivity">
+
+    <EditText
+        android:id="@+id/etIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="IP-Address"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etIP"
+        android:hint="Port No"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPort"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Connect To Server" />
+
+    <TextView
+        android:id="@+id/tvMessages"
+        android:layout_width="match_parent"
+        android:layout_height="324dp"
+        android:layout_above="@+id/etMessage"
+        android:layout_below="@+id/btnConnect"
+        android:layout_marginBottom="128dp"
+        android:inputType="textMultiLine"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSend"
+        android:hint="Enter Message"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="SEND" />
+
+    <Button
+        android:id="@+id/Near"
+        android:layout_width="110dp"
+        android:layout_height="74dp"
+        android:layout_above="@+id/etMessage"
+        android:layout_marginBottom="26dp"
+        android:text="Near" />
+
+    <Button
+        android:id="@+id/mid"
+        android:layout_width="110dp"
+        android:layout_height="74dp"
+        android:layout_above="@+id/etMessage"
+        android:layout_marginBottom="26dp"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/Near"
+        android:text="Middle" />
+
+    <Button
+        android:id="@+id/Far"
+        android:layout_width="110dp"
+        android:layout_height="74dp"
+        android:layout_above="@+id/etMessage"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="26dp"
+        android:layout_toRightOf="@+id/mid"
+        android:text="Far" />
+</RelativeLayout>
