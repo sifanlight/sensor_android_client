@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
 //    boolean isNear = true;
     int isNear;
 
+    String accelMessage = "{\"S\":\"A\",\"x\":"+ Float.toString(0) + ",\"y\":" + Float.toString(0)+ ",\"z\":" + Float.toString(0)+"}";
+    String gravityMessage = "{\"S\": \"G\",\"x\":"+ Float.toString(0) + ",\"y\":" + Float.toString(0)+ ",\"z\":" + Float.toString(0)+"}";
+    String gyroMessage = "{\"S\":\"Gy\",\"x\":"+ Float.toString(0) + ",\"y\":" + Float.toString(0)+ ",\"z\":" + Float.toString(0)+"}";
+
     Thread Thread1 = null;
     EditText etIP, etPort;
     TextView tvMessages;
@@ -134,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-        sensormanager.registerListener(gyroListener, gyro, SensorManager.SENSOR_DELAY_NORMAL);
-        sensormanager.registerListener(accelListener, accel, SensorManager.SENSOR_DELAY_NORMAL);
-        sensormanager.registerListener(gravityListener, gravity, SensorManager.SENSOR_DELAY_NORMAL);
+        sensormanager.registerListener(gyroListener, gyro, SensorManager.SENSOR_DELAY_UI);
+        sensormanager.registerListener(accelListener, accel, SensorManager.SENSOR_DELAY_UI);
+        sensormanager.registerListener(gravityListener, gravity, SensorManager.SENSOR_DELAY_UI);
     }
 
     public void onStop() {
@@ -154,10 +158,10 @@ public class MainActivity extends AppCompatActivity {
                 gyrox = sensorEvent.values[0];
                 gyroy = sensorEvent.values[1];
                 gyroz = sensorEvent.values[2];
-                String gyroMessage = "{\"Sensor\":\"Gyro\",\"x\":"+ Float.toString(gyrox) + ",\"y\":" + Float.toString(gyroy)+ ",\"z\":" + Float.toString(gyroz)+"}";
-                if (flag) {
-                    new Thread(new Thread3(gyroMessage)).start();
-                }
+                gyroMessage = "{\"S\":\"Gy\",\"x\":"+ Float.toString(gyrox) + ",\"y\":" + Float.toString(gyroy)+ ",\"z\":" + Float.toString(gyroz)+"}";
+//                if (flag) {
+//                    new Thread(new Thread3(gyroMessage)).start();
+//                }
         }
 
         @Override
@@ -172,12 +176,12 @@ public class MainActivity extends AppCompatActivity {
             accelx = sensorEvent.values[0];
             accely = sensorEvent.values[1];
             accelz = sensorEvent.values[2];
-            String accelMessage = "{\"Sensor\":\"Accel\",\"x\":"+ Float.toString(accelx) + ",\"y\":" + Float.toString(accely)+ ",\"z\":" + Float.toString(accelz)+"}";
+            accelMessage = "{\"S\":\"A\",\"x\":"+ Float.toString(accelx) + ",\"y\":" + Float.toString(accely)+ ",\"z\":" + Float.toString(accelz)+"}";
 
-            if (flag) {
-                new Thread(new Thread3(accelMessage)).start();
-
-            }
+//            if (flag) {
+//                new Thread(new Thread3(accelMessage)).start();
+//
+//            }
         }
 
         @Override
@@ -192,20 +196,20 @@ public class MainActivity extends AppCompatActivity {
             gravityx = sensorEvent.values[0];
             gravityy = sensorEvent.values[1];
             gravityz = sensorEvent.values[2];
-            String gravityMessage = "{\"Sensor\": \"Gravity\",\"x\":"+ Float.toString(gravityx) + ",\"y\":" + Float.toString(gravityy)+ ",\"z\":" + Float.toString(gravityz)+"}";
+            gravityMessage = "{\"S\": \"G\",\"x\":"+ Float.toString(gravityx) + ",\"y\":" + Float.toString(gravityy)+ ",\"z\":" + Float.toString(gravityz)+"}";
             String payLoad;
             if (flag) {
-                new Thread(new Thread3(gravityMessage)).start();
+//                new Thread(new Thread3(gravityMessage)).start();
                 if (isNear == 1){
-                    payLoad = "{\"Label\": \"Near\"}";
+                    payLoad = "{\"L\": \"N\"}";
                 }
                 else if (isNear == 2){
-                    payLoad = "{\"Label\": \"Mdle\"}";
+                    payLoad = "{\"L\": \"M\"}";
                 }
                 else{
-                    payLoad = "{\"Label\": \"Farr\"}";
+                    payLoad = "{\"L\": \"F\"}";
                 }
-                new Thread(new Thread3(payLoad)).start();
+                new Thread(new Thread3(payLoad+accelMessage+gyroMessage+gravityMessage)).start();
             }
         }
 
