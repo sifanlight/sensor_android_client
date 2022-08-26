@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnConnect = findViewById(R.id.btnConnect);
 
         sensormanager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        gyro =sensormanager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        gyro =sensormanager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
         gravity = sensormanager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         accel = sensormanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         btnNear.setBackgroundColor(Color.RED);
